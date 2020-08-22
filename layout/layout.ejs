@@ -1,0 +1,33 @@
+<%- include('header.ejs') %>
+
+<div class="page-information-card-container">
+	<% if (is_tag() || is_category() || (is_archive() && page.year != undefined)) { %>
+		<%- include('information-card.ejs') %>
+	<% } %>
+</div>
+
+<%- include('sidebar.ejs') %>
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		<% if (is_home()) { %>
+			<%- include('index.ejs') %>
+		<% } %>
+		<% if (is_post() || is_page()) { %>
+			<%- include('post.ejs') %>
+		<% } %>
+		<% if (is_archive()) { 
+			if (page.year != undefined){ %>
+				<%- include('index.ejs') %>
+			<%} else {%>
+				<%- include('archive.ejs') %>
+		<% 	}
+		} %>
+		<% if (is_tag()) { %>
+			<%- include('index.ejs') %>
+		<% } %>
+		<% if (is_category()) { %>
+			<%- include('index.ejs') %>
+		<% } %>
+
+<%- include('footer.ejs') %>

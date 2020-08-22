@@ -1,0 +1,217 @@
+<div id="sidebar_mask"></div>
+<aside id="leftbar" class="leftbar widget-area" role="complementary">
+		<% if (theme.sidebar_announcement != ''){ %>
+			<div id="leftbar_announcement" class="card bg-white shadow-sm border-0">
+				<div class="leftbar-announcement-body">
+					<div class="leftbar-announcement-title text-white">公告</div>
+					<div class="leftbar-announcement-content text-white"><%= theme.sidebar_announcement %></div>
+				</div>
+			</div>
+		<% } %>
+		<div id="leftbar_part1" class="widget widget_search card bg-white shadow-sm border-0">
+			<div class="leftbar-banner card-body">
+				<span class="leftbar-banner-title text-white"><%= theme.sidebar_banner_title == '' ? config.title : theme.sidebar_banner_title %></span>
+				<% 
+					let sidebar_subtitle = theme.sidebar_banner_subtitle;
+					if (sidebar_subtitle == "--hitokoto--"){
+						sidebar_subtitle = "<span class='hitokoto'></span>";
+					}
+				%>
+				<% if (sidebar_subtitle != '') { %>
+					<span class="leftbar-banner-subtitle text-white"><%- sidebar_subtitle %></span>
+				<% } %>
+			</div>
+			<%
+				function get_sidebar_menu(menu){
+					let res = "";
+					for (i in menu){
+						let has_children = (typeof(menu[i]) == "object");
+						let current = false;
+						if (!has_children){
+							current = (path.replace(/\/?index\.html$/g, "") == url_for(menu[i]).replace(/\/$/g, "").replace(/^\//g, ""));
+						}
+						res += "<li class='leftbar-menu-item" + ( has_children ? " leftbar-menu-item-haschildren" : "" ) + ( current ? " current" : "" ) + "'>";
+						res += "<a";
+						if (!has_children){
+							res += " href='" + url_for(menu[i]) + "'";
+						}
+						res += ( has_children ? " no-pjax onclick='return false;'" : "" ) + ">" + i + "</a>";
+						if (has_children){
+							res += "<ul class='leftbar-menu-item leftbar-menu-subitem shadow-sm'>";
+							res += get_sidebar_menu(menu[i]);
+							res += "</ul>";
+						}
+						res += "</li>";
+					}
+					return res;
+				}
+			%>
+			<% if (theme.leftbar_menu != false){ %>
+				<ul id='leftbar_part1_menu' class='leftbar-menu'>
+					<%-	get_sidebar_menu(theme.leftbar_menu) %>
+				</ul>
+			<% } %>
+			<div class="card-body text-center leftbar-search-button">
+				<button id="leftbar_search" class="btn btn-secondary btn-lg active btn-sm btn-block border-0" role="button" data-toggle="modal" data-target="#argon_search_modal" >
+					<i class="menu-item-icon fa fa-search mr-0"></i> 搜索
+				</button>
+			</div>
+		</div>
+		<div id="leftbar_part2" class="widget widget_search card bg-white shadow-sm border-0">
+			<div id="leftbar_part2_inner" class="card-body">
+				<%
+					let nowActiveTab = 1;
+					if (is_post()){
+						nowActiveTab = 0;
+					}
+				%>
+				<div class="nav-wrapper" style="padding-top: 5px;<% if (!is_post()) { %> display:none; <% } %>">
+	                <ul class="nav nav-pills nav-fill" role="tablist">
+						<% if (is_post()) { %>
+							<li class="nav-item sidebar-tab-switcher">
+								<a class="<% if (nowActiveTab == 0) { %>active show<% } %>" id="leftbar_tab_catalog_btn" data-toggle="tab" href="#leftbar_tab_catalog" role="tab" aria-controls="leftbar_tab_catalog" no-pjax>文章目录</a>
+							</li>
+						<% } %>
+						<li class="nav-item sidebar-tab-switcher">
+							<a class="<% if (nowActiveTab == 1) { %>active show<% } %>" id="leftbar_tab_overview_btn" data-toggle="tab" href="#leftbar_tab_overview" role="tab" aria-controls="leftbar_tab_overview" no-pjax>站点概览</a>
+						</li>
+	                </ul>
+				</div>
+				<div>
+					<div class="tab-content" style="padding: 10px 10px 0 10px;">
+						<% if (is_post()) { %>
+							<div class="tab-pane fade<% if (nowActiveTab == 0) { %> active show<% } %>" id="leftbar_tab_catalog" role="tabpanel" aria-labelledby="leftbar_tab_catalog_btn">
+								<div id="leftbar_catalog"></div>
+								<script type="text/javascript">
+									$(function () {
+										$(document).headIndex({
+											articleWrapSelector: '#post_content',
+											indexBoxSelector: '#leftbar_catalog',
+											subItemBoxClass: "index-subItem-box",
+											itemClass: "index-item",
+											linkClass: "index-link",
+											offset: 80,
+										});
+									})
+								</script>
+								<% if (theme.show_headindex_number) { %>
+									<style>
+										#leftbar_catalog ul {
+											counter-reset: blog_catalog_number;
+										}
+										#leftbar_catalog li.index-item > a:before {
+											content: counters(blog_catalog_number, '.') " ";
+											counter-increment: blog_catalog_number;
+										}
+									</style>
+								<% } %>
+							</div>
+						<% } %>
+						<div class="tab-pane fade text-center<% if (nowActiveTab == 1) { %> active show<% } %>" id="leftbar_tab_overview" role="tabpanel" aria-labelledby="leftbar_tab_overview_btn">
+							<img id="leftbar_overview_author_image" src="<%= theme.sidebar_auther_image == '' ? 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cmVjdCBmaWxsPSIjNUU3MkU0MjIiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIi8+PGc+PGcgb3BhY2l0eT0iMC4zIj48cGF0aCBmaWxsPSIjNUU3MkU0IiBkPSJNNzQuMzksMzIuODZjLTAuOTgtMS43LTMuMzktMy4wOS01LjM1LTMuMDlINDUuNjJjLTEuOTYsMC00LjM3LDEuMzktNS4zNSwzLjA5TDI4LjU3LDUzLjE1Yy0wLjk4LDEuNy0wLjk4LDQuNDgsMCw2LjE3bDExLjcxLDIwLjI5YzAuOTgsMS43LDMuMzksMy4wOSw1LjM1LDMuMDloMjMuNDNjMS45NiwwLDQuMzctMS4zOSw1LjM1LTMuMDlMODYuMSw1OS4zMmMwLjk4LTEuNywwLjk4LTQuNDgsMC02LjE3TDc0LjM5LDMyLjg2eiIvPjwvZz48ZyBvcGFjaXR5PSIwLjgiPjxwYXRoIGZpbGw9IiM1RTcyRTQiIGQ9Ik02Mi4wNCwyMC4zOWMtMC45OC0xLjctMy4zOS0zLjA5LTUuMzUtMy4wOUgzMS43M2MtMS45NiwwLTQuMzcsMS4zOS01LjM1LDMuMDlMMTMuOSw0Mi4wMWMtMC45OCwxLjctMC45OCw0LjQ4LDAsNi4xN2wxMi40OSwyMS42MmMwLjk4LDEuNywzLjM5LDMuMDksNS4zNSwzLjA5aDI0Ljk3YzEuOTYsMCw0LjM3LTEuMzksNS4zNS0zLjA5bDEyLjQ5LTIxLjYyYzAuOTgtMS43LDAuOTgtNC40OCwwLTYuMTdMNjIuMDQsMjAuMzl6Ii8+PC9nPjwvZz48L3N2Zz4=' : theme.sidebar_auther_image %>" class="img-fluid rounded-circle shadow-sm" style="width: 100px;" alt="avatar">
+							<h6 id="leftbar_overview_author_name"><%= theme.sidebar_auther_name == '' ? config.title : theme.sidebar_auther_name %></h6>
+							<nav class="site-state">
+								<div class="site-state-item site-state-posts">
+									<a href="<%= url_for('/archives')%>">
+										<span class="site-state-item-count"><%= site.posts.length %></span>
+										<span class="site-state-item-name">文章</span>
+									</a>
+								</div>
+								<div class="site-state-item site-state-categories">
+									<a data-toggle="modal" data-target="#blog_categories">
+										<span class="site-state-item-count"><%= site.categories.length %></span>
+										<span class="site-state-item-name">分类</span>
+									</a>
+								</div>      
+								<div class="site-state-item site-state-tags">
+									<a data-toggle="modal" data-target="#blog_tags">
+										<span class="site-state-item-count"><%= site.tags.length %></span>
+										<span class="site-state-item-name">标签</span>
+									</a>
+								</div>
+							</nav>
+							<%
+								if (theme.leftbar_author_links != false){ %>
+									<div class="site-author-links">
+										<% for (i in theme.leftbar_author_links){ %>
+											<div class='site-author-links-item'>
+												<a href="<%= theme.leftbar_author_links[i] %>" rel='noopener' target='_blank'><%- i %></a>
+											</div>
+										<% } %>
+									</div>
+								<% }
+							%>
+							<%
+								if (theme.leftbar_friend_links != false){ %>
+									<div class='site-friend-links'>
+										<div class='site-friend-links-title'><i class='fa fa-fw fa-link'></i> Links</div>
+										<ul class='site-friend-links-ul'>
+											<% for (i in theme.leftbar_friend_links){ %>
+												<li class='site-friend-links-item'>
+													<a href='<%= theme.leftbar_friend_links[i] %>' rel='noopener' target='_blank'><%- i %></a>
+												</li>
+											<% } %>
+										</ul>
+									</div>
+								<% } else { %>
+									<div style="height: 20px;"></div>
+								<% }
+							%>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</aside>
+<div class="modal fade" id="blog_categories" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">分类</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<%- list_tags(
+					site.categories, {
+						class: {
+							a: 'badge badge-secondary tag',
+							count: 'tag-num'},
+						style: false,
+						separator: '',
+						transform(str) {
+							return str + " ";
+						}
+					})
+				%>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="blog_tags" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">标签</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<%- list_tags(
+					site.tags, {
+						class: {
+							a: 'badge badge-secondary tag',
+							count: 'tag-num'},
+						style: false,
+						separator: '',
+						transform(str) {
+							return str + " ";
+						}
+					})
+				%>
+			</div>
+		</div>
+	</div>
+</div>

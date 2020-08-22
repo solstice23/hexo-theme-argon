@@ -1,0 +1,7 @@
+<% if (is_post()) { %>
+	<%- partial('_partial/content-article', {post: page}) %>
+	<%- partial('_partial/article-bottom', {post: page}) %>
+<% } %>
+<% if (is_page()) { %>
+	<%- partial('_partial/content-page', {post: page}) %>
+<% } %>

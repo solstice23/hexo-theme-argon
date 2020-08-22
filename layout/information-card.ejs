@@ -1,0 +1,30 @@
+<%
+	let archive_name = "";
+	let archive_title = "";
+	let archive_count = -1;
+	if (is_tag()){
+		archive_name = "标签";
+		archive_title = page.tag;
+		archive_count = site.tags.findOne({name: page.tag}).length;
+	}
+	if (is_category()){
+		archive_name = "分类";
+		archive_title = page.category;
+		archive_count = site.categories.findOne({name: page.category}).length;
+	}
+	if (is_archive()){
+		archive_name = "归档";
+		archive_title = page.year + (page.month == undefined ? '' : '/' + page.month);
+	}
+%>
+<div class="page-information-card card bg-gradient-secondary shadow-lg border-0">
+	<div class="card-body">
+		<h3 class="text-black"><%= archive_name %> : <%= archive_title %> </h3>
+		<% if (archive_count != -1){ %>
+			<p class="text-black mt-3 mb-0 opacity-8">
+				<i class="fa fa-file-o mr-1"></i>
+				<%= archive_count %> 篇文章
+			</p>
+		<% } %>
+	</div>
+</div>

@@ -1,0 +1,116 @@
+<article class="post post-full card bg-white shadow-sm border-0 <%= theme.enable_into_article_animation ? 'post-preview' : '' %>">
+	<header class="post-header text-center<%= has_thumbnail(post, theme) ? ' post-header-with-thumbnail' : ''%>">
+		<%
+			if (has_thumbnail(post, theme) && !theme.show_thumbnail_in_banner_in_content_page){
+				let thumbnail_url = get_thumbnail(post, theme); %>
+				<img class='post-thumbnail lazyload' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABBJREFUeNpi+P//PwNAgAEACPwC/tuiTRYAAAAASUVORK5CYII=' data-original='<%= thumbnail_url %>' alt='thumbnail'></img>
+				<div class='post-header-text-container'>
+			<% }
+			if (has_thumbnail(post, theme) && theme.show_thumbnail_in_banner_in_content_page){
+				let thumbnail_url = get_thumbnail(post, theme); %>
+				<style>
+					body section.banner {
+						background-image: url(<%= thumbnail_url %>) !important;
+					}
+				</style>
+			<% }
+		%>
+		<a class="post-title" href="<%= url_for(post.path) %>"><%= post.title %></a>
+		<div class="post-meta">
+			<%
+				let meta_list = theme.article_meta.split('|');
+				for (let i in meta_list){
+					if (meta_list[i] == 'time'){ %>
+						<% if (i > 0){ %>
+						<% } %>
+						<div class="post-meta-detail post-meta-detail-time">
+							<i class="fa fa-clock-o" aria-hidden="true"></i>
+							<time title="发布于 <%- full_date(post.date, 'YYYY-M-D H:mm:ss') %> | 编辑于 <%- full_date(post.updated, 'YYYY-M-D H:mm:ss') %>"><%- full_date(post.date, 'YYYY-M-D H:mm') %>
+							</time>
+						</div>
+					<% }
+					if (meta_list[i] == 'edittime'){ %>
+						<% if (i > 0){ %>
+							<div class="post-meta-devide">|</div>
+						<% } %>
+						<div class="post-meta-detail post-meta-detail-edittime">
+							<i class="fa fa-clock-o" aria-hidden="true"></i>
+							<time title="发布于 <%- full_date(post.date, 'YYYY-M-D H:mm:ss') %> | 编辑于 <%- full_date(post.updated, 'YYYY-M-D H:mm:ss') %>"><%- full_date(post.updated, 'YYYY-M-D H:mm') %>
+							</time>
+						</div>
+					<% }
+					if (meta_list[i] == 'categories' && post.categories.length > 0){ %>
+						<% if (i > 0){ %>
+							<div class="post-meta-devide">|</div>
+						<% } %>
+						<div class="post-meta-detail post-meta-detail-categories">
+							<i class="fa fa-bookmark-o" aria-hidden="true"></i>
+							<%- list_categories(post.categories, {
+								show_count: false,
+								class: 'post-meta-detail-catagory',
+								style: 'none',
+								separator: ' , '
+							}) %>
+						</div>
+					<% }
+					if (meta_list[i] == 'words'){ %>
+						<% if (i > 0){ %>
+							<div class="post-meta-devide">|</div>
+						<% } %>
+						<div class="post-meta-detail post-meta-detail-words">
+							<i class="fa fa-file-word-o" aria-hidden="true"></i>
+							<%= wordcount(post.content) %> 字
+						</div>
+					<% }
+					if (meta_list[i] == 'readingtime'){ %>
+						<% if (i > 0){ %>
+							<div class="post-meta-devide">|</div>
+						<% } %>
+						<div class="post-meta-detail post-meta-detail-readingtime">
+							<i class="fa fa-hourglass-end" aria-hidden="true"></i>
+							<%= min2read(post.content,{cn:theme.reading_speed_cn, en:theme.reading_speed_en}) %> 分钟
+						</div>
+					<% }
+					
+				}
+			%>
+		</div>
+		<%
+			if (has_thumbnail(post, theme) && !theme.show_thumbnail_in_banner_in_content_page){ %>
+				</div>
+			<% }
+		%>
+	</header>
+
+	<div class="post-content" id="post_content">
+		<%- argon_preprocess_article(post.content, theme) %>
+	</div>
+
+	<% if (theme.donate_qrcode_url != '') { %>
+		<div class="post-donate">
+			<button class="btn donate-btn btn-danger">赞赏</button>
+			<div class="donate-qrcode card shadow-sm bg-white">
+				<img src="<%= theme.donate_qrcode_url %>">
+			</div>
+		</div>
+	<% } %>
+
+	<%
+		let additionalContentAfterPost = get_additional_content_after_post(post, theme);
+		if (additionalContentAfterPost != ""){ %>
+			<div class='additional-content-after-post'><%- additionalContentAfterPost %></div>
+		<%}
+	%>
+
+	<% if (post.tags.length) { %>
+		<div class="post-tags">
+			<i class="fa fa-tags" aria-hidden="true"></i>
+			<%- list_tags(post.tags, {
+				show_count: false,
+				class: 'tag badge badge-secondary post-meta-detail-tag ',
+				style: 'none',
+				separator: ''
+			}) %>
+		</div>
+	<% } %>
+</article>

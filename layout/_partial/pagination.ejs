@@ -1,0 +1,44 @@
+<%
+	function get_page_url(num){
+		if (num == 1){
+			return url_for(page.base);
+		}
+		return url_for(page.base + config.pagination_dir + '/' + num + '/');
+	}
+	function get_argon_formatted_paginate_links(maxPageNumbers, extraClasses){
+		if (page.total == 1){
+			return "";
+		}
+		let from = Math.max(page.current - (maxPageNumbers - 1) / 2 , 1);
+		let to = Math.min(page.current + maxPageNumbers - ( page.current - from + 1 ) , page.total);
+		if (to - from + 1 < maxPageNumbers){
+			to = Math.min(page.current + (maxPageNumbers - 1) / 2 , page.total);
+			from = Math.max(page.current - ( maxPageNumbers - ( to - page.current + 1 ) ) , 1);
+		}
+		let html = "";
+		if (from > 1){
+			html += '<li class="page-item"><a aria-label="First Page" class="page-link" href="' + get_page_url(1) + '"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>';
+		}
+		if (page.current > 1){
+			html += '<li class="page-item"><a aria-label="Previous Page" class="page-link" href="' + get_page_url(page.current - 1) + '"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>';
+		}
+		for (let i = from; i <= to; i++){
+			if (page.current == i){
+				html += '<li class="page-item active"><span class="page-link" style="cursor: default;">' + i + '</span></li>';
+			}else{
+				html += '<li class="page-item"><a class="page-link" href="' + get_page_url(i) + '">' + i + '</a></li>';
+			}
+		}
+		if (page.current < page.total){
+			html += '<li class="page-item"><a aria-label="Next Page" class="page-link" href="' + get_page_url(page.current + 1) + '"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>';
+		}
+		if (to < page.total){
+			html += '<li class="page-item"><a aria-label="Last Page" class="page-link" href="' + get_page_url(page.total) + '"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>';
+		}
+		return '<nav><ul class="pagination' + extraClasses + '">' + html + '</ul></nav>';
+	}
+	function get_argon_formatted_paginate_links_for_all_platforms(){
+		return get_argon_formatted_paginate_links(7, "") + get_argon_formatted_paginate_links(5, " pagination-mobile");
+	}
+%>
+<%-	get_argon_formatted_paginate_links_for_all_platforms() %>

@@ -1,0 +1,4 @@
+<% page.posts.each(function(post){ %>
+	<%- partial('_partial/content-preview', {post: post}) %>
+<% }) %>
+<%- partial('_partial/pagination', {page: page}) %>

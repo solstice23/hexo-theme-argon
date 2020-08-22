@@ -1,0 +1,28 @@
+<article class="post post-full card bg-white shadow-sm border-0">
+	<header class="post-header text-center">
+		<a class="post-title" href="<%= url_for(page.path).replace(/index\.html$/g, '') %>">归档</a>
+	</header>
+
+	<div class="post-content" id="post_content">
+		<div class='argon-timeline'>
+			<%
+				let last_year = 0;
+				site.posts.sort('date', -1).each(function(post){ 
+					let year = post.date.format('YYYY');
+					if (year != last_year){ %>
+						<div class='argon-timeline-node'>
+							<div class='argon-timeline-time archive-timeline-year'><%= year %></div>
+							<div class='argon-timeline-card card bg-gradient-secondary archive-timeline-title'></div>
+						</div>
+						<% last_year = year;
+					} %>
+					<div class='argon-timeline-node'>
+						<div class='argon-timeline-time'><%= post.date.format('M-D') %></div>
+						<div class='argon-timeline-card card bg-gradient-secondary archive-timeline-title'>
+							<a href="<%= url_for(post.path) %>"><%= post.title %></a>
+						</div>
+					</div>
+			<% }); %>
+		</div>
+	</div>
+</article>
