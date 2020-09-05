@@ -1,3 +1,3 @@
 hexo.extend.helper.register('argon_version', function () {
-	return "1.0.0.beta";
+	return "1.0.0";
 });

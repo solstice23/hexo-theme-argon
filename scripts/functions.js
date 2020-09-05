@@ -218,8 +218,13 @@ hexo.extend.helper.register('totalcount', function (site) {
 });
 
 //excerpt
-hexo.extend.helper.register('getexcerpt', function (content, len) {
+hexo.extend.helper.register('getexcerpt', function (content, len, moretag) {
 	content = stripHTML(content);
+	if (moretag){
+		if (content.search(/<!--more(.*?)-->/i) !== -1){
+			return content.substr(0, content.search(/<!--more(.*?)-->/i)) + "...";
+		}
+	}
 	if (content.length <= len){
 		return content;
 	}
@@ -227,7 +232,7 @@ hexo.extend.helper.register('getexcerpt', function (content, len) {
 });
 
 //预处理文章
-hexo.extend.helper.register('argon_preprocess_article', function (content, theme) {
+hexo.extend.helper.register('argon_preprocess_article', function (content, theme, moretag) {
 	//Lazyload
 	if (theme.enable_lazyload){
 		let lazyload_loading_style = theme.lazyload_loading_style;
@@ -239,6 +244,12 @@ hexo.extend.helper.register('argon_preprocess_article', function (content, theme
 		content = content.replace(/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/ig,"<img class=\"lazyload " + lazyload_loading_style + "\" src=\"data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+\" \$1data-original=\"\$2\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC\"\$3>\n");
 		content = content.replace(/<img(.*?)data-full-url=[\'"]([^\'"]+)[\'"](.*)>/ig,"<img$1data-full-url=\"$2\" data-original=\"$2\"$3>");
 		content = content.replace(/<img(.*?)srcset=[\'"](.*?)[\'"](.*)>/ig,"<img$1$3>");
+	}
+	//More Tag
+	if (moretag){
+		if (content.search(/<!--more(.*?)-->/i) !== -1){
+			content = content.substr(0, content.search(/<!--more(.*?)-->/i)) + "...";
+		}
 	}
 	return content;
 });

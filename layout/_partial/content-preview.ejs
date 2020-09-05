@@ -76,9 +76,13 @@
 
 	<div class="post-content">
 		<% if (theme.excerpt) { %>
-			<%- getexcerpt(post.content, 175) %>
+			<% if (post.excerpt) { %>
+				<%- post.excerpt %>
+			<% } else { %>
+				<%- getexcerpt(post.content, 175, true) %>
+			<% } %>
 		<% } else { %>
-			<%- argon_preprocess_article(post.content, theme) %>
+			<%- argon_preprocess_article(post.content, theme, true) %>
 		<% } %>
 	</div>
 
