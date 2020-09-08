@@ -4151,7 +4151,7 @@ html.darkmode.amoled-dark #content:before , html.darkmode.amoled-dark #content:a
 	#navbar_search_btn_mobile{
 		display: list-item;
 	}
-	#navbar_search_container{
+	#navbar_search_btn_pc{
 		display: none;
 	}
 	#navbar_global.show + #navbar_menu_mask{

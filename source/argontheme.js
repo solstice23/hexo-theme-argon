@@ -1384,6 +1384,11 @@ if (search_path.length == 0) {
 }
 searchFunc($("#local-search-input").data("config.root") + search_path, 'local-search-input', 'local-search-result');
 
+$(document).on("click" , ".search-result-title" , function(){
+	$("#argon_search_modal button[data-dismiss='modal']").click();
+});
+
+
 /*Console*/
 !function(){
 	console.log('%cTheme: %cArgon%c-Hexo%c By solstice23', 'color: rgba(255,255,255,.6); background: #5e72e4; font-size: 15px;border-radius:5px 0 0 5px;padding:10px 0 10px 20px;','color: rgba(255,255,255,1); background: #5e72e4; font-size: 15px;border-radius:0;padding:10px 0 10px 0px;', 'color: rgba(255,255,255,.6); background: #5e72e4; font-size: 15px;padding:10px 15px 10px 0px;','color: #fff; background: #92A1F4; font-size: 15px;border-radius:0 5px 5px 0;padding:10px 20px 10px 15px;');

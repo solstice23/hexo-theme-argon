@@ -39,20 +39,6 @@
 							</time>
 						</div>
 					<% }
-					if (meta_list[i] == 'categories' && post.categories.length > 0){ %>
-						<% if (i > 0){ %>
-							<div class="post-meta-devide">|</div>
-						<% } %>
-						<div class="post-meta-detail post-meta-detail-categories">
-							<i class="fa fa-bookmark-o" aria-hidden="true"></i>
-							<%- list_categories(post.categories, {
-								show_count: false,
-								class: 'post-meta-detail-catagory',
-								style: 'none',
-								separator: ' , '
-							}) %>
-						</div>
-					<% }
 					if (meta_list[i] == 'words'){ %>
 						<% if (i > 0){ %>
 							<div class="post-meta-devide">|</div>
