@@ -23,7 +23,7 @@ banner_title: '' #Banner 标题，留空则跟随博客标题
 enable_banner_title_typing_effect: false #是否启用 Banner 打字效果
 theme.banner_typing_effect_interval: 100 #Banner 打字间隔时长，单位 字/ms
 banner_subtitle: '' #Banner 子标题，留空则不显示
-banner_background_url: '' #Banner 背景图，留空则不显示
+banner_background_url: '/assets/img/banner.jpg' #Banner 背景图，留空则不显示
 banner_background_hide_shapes: false #是否隐藏 Banner 背景圆形
 banner_background_color_type: 'shape-primary' #Banner 渐变样式，Banner 背景图会覆盖该选项，可选值: shape-primary, shape-default, shape-dark, bg-gradient-success, bg-gradient-info, bg-gradient-warning, bg-gradient-danger
 
@@ -37,7 +37,7 @@ leftbar_menu: #侧栏顶部菜单，支持无限层级菜单嵌套
   二级菜单:
     三级菜单:
       首页: /
-sidebar_auther_image: '' #侧栏作者头像
+sidebar_auther_image: '/assets/img/auther.jpg' #侧栏作者头像
 sidebar_auther_name: '' #侧栏作者名，留空则跟随博客名
 leftbar_author_links: #侧栏作者链接列表
   aaa: /
@@ -52,7 +52,7 @@ show_headindex_number: false #侧栏文章目录是否显示章节编号
 #文章
 excerpt: true #是否显示文章摘要，为 false 则显示全文
 first_image_as_thumbnail: false #自动取文章第一张图为特色图片
-article_meta: time|categories|words|readingtime #文章 Meta 信息列表，用竖线分隔开，可选: time 发布时间, edittime 编辑时间, categories 分类, words 字数, readingtime 预计阅读时间
+article_meta: time|categories|read|words|readingtime #文章 Meta 信息列表，用竖线分隔开，可选: time 发布时间, edittime 编辑时间, categories 分类, read 阅读量，words 字数, readingtime 预计阅读时间
 reading_speed_cn: 300 #每分钟中文阅读字数，用于计算预计阅读时间
 reading_speed_en: 160 #每分钟英文阅读单词数，用于计算预计阅读时间
 donate_qrcode_url: '' #赞赏二维码地址，留空则不显示
@@ -61,8 +61,8 @@ article_header_style: default #文章内小标题样式，可选值: default, 1,
 
 
 #背景
-page_background_url: '' #页面背景地址，留空则不设页面背景
-page_background_dark_url: '' #夜间模式页面背景地址，留空则跟随日间模式
+page_background_url: '/assets/img/banner.jpg' #页面背景地址，留空则不设页面背景
+page_background_dark_url: '/assets/img/banner.jpg' #夜间模式页面背景地址，留空则跟随日间模式
 page_background_opacity: 1 #页面背景不透明度，0 ~ 1的小数
 transparent_banner: true #Banner 透明化，如果设置了背景以后推荐开启该选项
 show_toolbar_mask: false #顶栏遮罩，如背景图片影响了顶栏文字显示对比度建议开启
@@ -116,7 +116,7 @@ custom_html_foot: '' #页尾脚本，HTML
 #评论
 gitalk:
   enable: true #是否启用 Gitalk 评论系统
-  owner: '' 
+  owner: ''
   repo: ''
   admin: ''
   clientID: ''

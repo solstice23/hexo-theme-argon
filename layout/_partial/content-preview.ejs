@@ -45,6 +45,17 @@
 							}) %>
 						</div>
 					<% }
+					if (meta_list[i] == 'read'){ %>
+						<% if (i > 0){ %>
+							<div class="post-meta-devide">|</div>
+						<% } %>
+						<div class="post-meta-detail post-meta-detail-words">
+							<i class="fa fa-book" aria-hidden="true"></i>
+							<span id="busuanzi_container_page_pv">
+								阅读<span id="busuanzi_value_page_pv"></span>次
+							</span>
+						</div>
+					<% }
 					if (meta_list[i] == 'words'){ %>
 						<% if (i > 0){ %>
 							<div class="post-meta-devide">|</div>
@@ -63,7 +74,7 @@
 							<%= min2read(post.content,{cn:theme.reading_speed_cn, en:theme.reading_speed_en}) %> 分钟
 						</div>
 					<% }
-					
+
 				}
 			%>
 		</div>
