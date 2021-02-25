@@ -21,7 +21,7 @@ toolbar_menu: #顶栏菜单，支持二级菜单
 #Banner
 banner_title: '' #Banner 标题，留空则跟随博客标题
 enable_banner_title_typing_effect: false #是否启用 Banner 打字效果
-theme.banner_typing_effect_interval: 100 #Banner 打字间隔时长，单位 字/ms
+theme.banner_typing_effect_interval: 100 #Banner 打字间隔时长，单位 ms/字
 banner_subtitle: '' #Banner 子标题，留空则不显示
 banner_background_url: '/assets/img/banner.jpg' #Banner 背景图，留空则不显示
 banner_background_hide_shapes: false #是否隐藏 Banner 背景圆形
