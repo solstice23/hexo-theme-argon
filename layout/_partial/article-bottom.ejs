@@ -106,6 +106,11 @@
 	<%- partial('_comment/gitalk') %>
 </div>
 <% } %>
+<% if (theme.giscus.enable) { %>
+	<div id="post_comment" class="card shadow-sm">
+		<%- partial('_comment/giscus') %>
+	</div>
+	<% } %>
 <%
 	function get_prev_next_post_card(){
 		let res = "";
