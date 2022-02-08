@@ -121,3 +121,13 @@ gitalk:
   admin: ''
   clientID: ''
   clientSecret: ''
+giscus: # https://giscus.app/zh-CN
+  enable: 
+  repo: ''
+  repo_id: ''
+  category: ''
+  category_id: ''
+  mapping: 'pathname'
+  input_position: 'top'
+  theme: 'light'
+  lang: 'zh-CN'
