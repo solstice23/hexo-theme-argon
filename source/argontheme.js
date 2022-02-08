@@ -4,7 +4,7 @@ if (typeof(argonConfig) == "undefined"){
 if (typeof(argonConfig.wp_path) == "undefined"){
 	argonConfig.wp_path = "/";
 }
-/*Cookies 操作*/
+/* Cookies 操作 */
 function setCookie(cname, cvalue, exdays) {
 	var d = new Date();
 	d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -27,7 +27,7 @@ function getCookie(cname) {
 	return "";
 }
 
-/*多语言支持*/
+/* 多语言支持 */
 var translation = {};
 translation['en_US'] = {
 	"确定": "OK",
@@ -211,7 +211,7 @@ function __(text){
 	return translation[lang][text];
 }
 
-/*根据滚动高度改变顶栏透明度*/
+/* 根据滚动高度改变顶栏透明度 */
 !function(){
 	let toolbar = document.getElementById("navbar-main");
 	let $bannerContainer = $("#banner_container");
@@ -251,7 +251,7 @@ function __(text){
 	document.addEventListener("scroll", changeToolbarTransparency, {passive: true});
 }();
 
-/*顶栏搜索*/
+/* 顶栏搜索 */
 $(document).on("click" , "#navbar_search_input_container" , function(){
 	$(this).addClass("open");
 	$("#navbar_search_input").focus();
@@ -273,7 +273,7 @@ $(document).on("keydown" , "#navbar_search_input_container #navbar_search_input"
 		url: argonConfig.wp_path + "?s=" + encodeURI(word)
 	});
 });
-/*侧栏搜索*/
+/* 侧栏搜索 */
 $(document).on("click" , "#leftbar_search_container" , function(){
 	$(".leftbar-search-button").addClass("open");
 	$("#leftbar_search_input").removeAttr("readonly").focus();
@@ -300,7 +300,7 @@ $(document).on("keydown" , "#leftbar_search_input" , function(e){
 	});
 });
 
-/*左侧栏随页面滚动浮动*/
+/* 左侧栏随页面滚动浮动 */
 !function(){
 	let $leftbarPart1 = $('#leftbar_part1');
 	let $leftbarPart2 = $('#leftbar_part2');
@@ -313,13 +313,13 @@ $(document).on("keydown" , "#leftbar_search_input" , function(e){
 	function changeLeftbarStickyStatus(){
 		let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 		if( part1OffsetTop + part1OuterHeight + 10 - scrollTop <= 90 ){
-			//滚动条在页面中间浮动状态
+			// 滚动条在页面中间浮动状态
 			leftbarPart2.classList.add('sticky');
 		}else{
-			//滚动条在顶部 不浮动状态
+			// 滚动条在顶部 不浮动状态
 			leftbarPart2.classList.remove('sticky');
 		}
-		if( part1OffsetTop + part1OuterHeight + 10 - scrollTop <= 20 ){//侧栏下部分是否可以随 Headroom 一起向上移动
+		if( part1OffsetTop + part1OuterHeight + 10 - scrollTop <= 20 ){// 侧栏下部分是否可以随 Headroom 一起向上移动
 			document.body.classList.add('leftbar-can-headroom');
 		}else{
 			document.body.classList.remove('leftbar-can-headroom');
@@ -339,7 +339,7 @@ $(document).on("keydown" , "#leftbar_search_input" , function(e){
 	}).observe(leftbarPart1, {attributes: true, childList: true, subtree: true});
 }();
 
-/*Headroom*/
+/* Headroom */
 if (argonConfig.headroom){
 	var headroom = new Headroom(document.querySelector("body"),{
 		"tolerance" : {
@@ -360,7 +360,7 @@ if (argonConfig.headroom){
 	}).init();
 }
 
-/*浮动按钮栏相关 (回顶等)*/
+/* 浮动按钮栏相关 （回顶等） */
 !function(){
 	let $fabtns = $('#float_action_buttons');
 	let $backToTopBtn = $('#fabtn_back_to_top');
@@ -419,7 +419,7 @@ if (argonConfig.headroom){
 			$fabtns.removeClass("fabtns-unloaded");
 		} , 300);
 	});
-	//博客设置
+	// 博客设置
 	$toggleBlogSettings.on("click" , function(){
 		$("#float_action_buttons").toggleClass("blog_settings_opened");
 	});
@@ -429,7 +429,7 @@ if (argonConfig.headroom){
 	$("#blog_setting_darkmode_switch .custom-toggle-slider").on("click" , function(){
 		toggleDarkmode();
 	});
-	//字体
+	// 字体
 	$("#blog_setting_font_sans_serif").on("click" , function(){
 		$("html").removeClass("use-serif");
 		localStorage['Argon_Use_Serif'] = "false";
@@ -443,7 +443,7 @@ if (argonConfig.headroom){
 	}else if (localStorage['Argon_Use_Serif'] == "false"){
 		$("html").removeClass("use-serif");
 	}
-	//阴影
+	// 阴影
 	$("#blog_setting_shadow_small").on("click" , function(){
 		$("html").removeClass("use-big-shadow");
 		localStorage['Argon_Use_Big_Shadow'] = "false";
@@ -457,7 +457,7 @@ if (argonConfig.headroom){
 	}else if (localStorage['Argon_Use_Big_Shadow'] == "false"){
 		$("html").removeClass("use-big-shadow");
 	}
-	//滤镜
+	// 滤镜
 	function setBlogFilter(name){
 		if (name == undefined || name == ""){
 			name = "off";
@@ -478,11 +478,11 @@ if (argonConfig.headroom){
 	});
 
 	function changefabtnDisplayStatus(){
-		//阅读进度
+		// 阅读进度
 		let readingProgress = $(window).scrollTop() / Math.max($(document).height() - $(window).height(), 0.01);
 		$readingProgressDetails.html((readingProgress * 100).toFixed(0) + "%");
 		$readingProgressBar.css("width" , (readingProgress * 100).toFixed(0) + "%");
-		//是否显示回顶
+		// 是否显示回顶
 		if ($(window).scrollTop() >= 400 || readingProgress >= 0.5){
 			$backToTopBtn.removeClass("fabtn-hidden");
 		}else{
@@ -496,7 +496,7 @@ if (argonConfig.headroom){
 	$fabtns.removeClass("fabtns-unloaded");
 }();
 
-/*卡片圆角大小调整*/
+/* 卡片圆角大小调整 */
 !function(){
 	function setCardRadius(radius, save){
 		document.documentElement.style.setProperty('--card-radius', radius + "px");
@@ -531,7 +531,7 @@ if (argonConfig.headroom){
 		setCardRadius(localStorage["argon_card_radius"], false);
 	}
 }();
-/*需要密码的文章加载*/
+/* 需要密码的文章加载 */
 $(document).on("submit" , ".post-password-form" , function(){
 	$("input[type='submit']", this).attr("disabled", "disabled");
 	let url = $(this).attr("action");
@@ -541,7 +541,7 @@ $(document).on("submit" , ".post-password-form" , function(){
 	});
 	return false;
 });
-/*URL 中 # 根据 ID 定位*/
+/* URL 中 # 根据 ID 定位 */
 function gotoHash(hash , durtion){
 	if (hash.length == 0){
 		return;
@@ -567,7 +567,7 @@ function getHash(url){
 	$(window).trigger("hashchange");
 }();
 
-/*显示文章过时信息 Toast*/
+/* 显示文章过时信息 Toast */
 function showPostOutdateToast(){
 	if ($("#primary #post_outdate_toast").length > 0){
 		iziToast.show({
@@ -589,7 +589,7 @@ function showPostOutdateToast(){
 }
 showPostOutdateToast();
 
-/*Zoomify*/
+/* Zoomify */
 function zoomifyInit(){
 	if (argonConfig.zoomify == false){
 		return;
@@ -598,7 +598,7 @@ function zoomifyInit(){
 }
 zoomifyInit();
 
-/*Lazyload*/
+/* Lazyload */
 function lazyloadInit(){
 	if (argonConfig.lazyload == false){
 		return;
@@ -611,7 +611,7 @@ function lazyloadInit(){
 }
 lazyloadInit();
 
-/*Pangu.js*/
+/* Pangu.js */
 function panguInit(){
 	if (argonConfig.pangu == true){
 		pangu.spacingElementById('post_content');
@@ -619,7 +619,7 @@ function panguInit(){
 }
 panguInit();
 
-/*Clamp.js*/
+/* Clamp.js */
 function clampInit(){
 	$(".clamp").each(function(index, dom) {
 		$clamp(dom, {clamp: dom.getAttribute("clamp-line")});
@@ -627,7 +627,7 @@ function clampInit(){
 }
 clampInit();
 
-/*Pjax*/
+/* Pjax */
 $.pjax.defaults.timeout = 10000;
 $.pjax.defaults.container = ['#primary', '#leftbar_part1_menu', '#leftbar_part2_inner', '.page-information-card-container', '#wpadminbar'];
 $.pjax.defaults.fragment = ['#primary', '#leftbar_part1_menu', '#leftbar_part2_inner', '.page-information-card-container', '#wpadminbar'];
@@ -706,7 +706,7 @@ $(document).pjax("a[href]:not([no-pjax]):not(.no-pjax):not([target='_blank']):no
 });
 
 
-/*Tags Dialog pjax 加载后自动关闭*/
+/* Tags Dialog pjax 加载后自动关闭 */
 $(document).on("click" , "#blog_tags .tag" , function(){
 	$("#blog_tags button.close").trigger("click");
 });
@@ -714,7 +714,7 @@ $(document).on("click" , "#blog_categories .tag" , function(){
 	$("#blog_categories button.close").trigger("click");
 });
 
-/*侧栏 & 顶栏菜单手机适配*/
+/* 侧栏 & 顶栏菜单手机适配 */
 !function(){
 	$(document).on("click" , "#fabtn_open_sidebar" , function(){
 		$("html").addClass("leftbar-opened");
@@ -733,7 +733,7 @@ $(document).on("click" , "#blog_categories .tag" , function(){
 	});
 }();
 
-/*折叠区块小工具*/
+/* 折叠区块小工具 */
 $(document).on("click" , ".collapse-block .collapse-block-title" , function(){
 	let id = this.getAttribute("collapse-id");
 	let selecter = ".collapse-block[collapse-id='" + id +"']";
@@ -746,7 +746,7 @@ $(document).on("click" , ".collapse-block .collapse-block-title" , function(){
 	$("html").trigger("scroll");
 });
 
-/*获得 Github Repo Shortcode 信息卡内容*/
+/* 获得 Github Repo Shortcode 信息卡内容 */
 function getGithubInfoCardContent(){
 	$(".github-info-card").each(function(){
 		(function($this){
@@ -773,7 +773,7 @@ function getGithubInfoCardContent(){
 					$(".github-info-card-description" , $this).html(description);
 					$(".github-info-card-stars" , $this).html(result.stargazers_count);
 					$(".github-info-card-forks" , $this).html(result.forks_count);
-					//console.log(result);
+					// console.log(result);
 				},
 				error : function(xhr){
 					if (xhr.status == 404){
@@ -788,7 +788,7 @@ function getGithubInfoCardContent(){
 }
 getGithubInfoCardContent();
 
-//颜色计算
+// 颜色计算
 function rgb2hsl(R,G,B){
 	let r = R / 255;
 	let g = G / 255;
@@ -827,7 +827,7 @@ function rgb2hsl(R,G,B){
 		if (H > 1) H -= 1;
 	}
 	return {
-		'h': H,//0~1
+		'h': H, // 0~1
 		's': S,
 		'l': L
 	};
@@ -860,10 +860,10 @@ function hsl2rgb(h,s,l){
 		b = Hue_2_RGB(var_1, var_2, h - (1 / 3));
 	}
 	return {
-		'R': Math.round(r * 255),//0~255
+		'R': Math.round(r * 255), // 0~255
 		'G': Math.round(g * 255),
 		'B': Math.round(b * 255),
-		'r': r,//0~1
+		'r': r, // 0~1
 		'g': g,
 		'b': b
 	};
@@ -887,15 +887,15 @@ function rgb2hex(r,g,b){
 	return "#" + rh + gh + bh;
 }
 function hex2rgb(hex){
-	//hex: #XXXXXX
+	// hex: #XXXXXX
 	let dec = {
 		'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, 'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15
 	};
 	return {
-		'R': (dec[hex.substr(1,1)] * 16 + dec[hex.substr(2,1)]),//0~255
+		'R': (dec[hex.substr(1,1)] * 16 + dec[hex.substr(2,1)]), // 0~255
 		'G': (dec[hex.substr(3,1)] * 16 + dec[hex.substr(4,1)]),
 		'B': (dec[hex.substr(5,1)] * 16 + dec[hex.substr(6,1)]),
-		'r': (dec[hex.substr(1,1)] * 16 + dec[hex.substr(2,1)]) / 255,//0~1
+		'r': (dec[hex.substr(1,1)] * 16 + dec[hex.substr(2,1)]) / 255, // 0~1
 		'g': (dec[hex.substr(3,1)] * 16 + dec[hex.substr(4,1)]) / 255,
 		'b': (dec[hex.substr(5,1)] * 16 + dec[hex.substr(6,1)]) / 255
 	};
@@ -913,7 +913,7 @@ function rgb2str(rgb){
 function hex2str(hex){
 	return rgb2str(hex2rgb(hex));
 }
-//颜色选择器 & 切换主题色
+// 颜色选择器 & 切换主题色
 if ($("meta[name='argon-enable-custom-theme-color']").attr("content") == 'true'){
 	let themeColorPicker = new Pickr({
 		el: '#theme-color-picker',
@@ -1024,7 +1024,7 @@ if (localStorage["argon_custom_theme_color"] != undefined){
 	updateThemeColor(localStorage["argon_custom_theme_color"], false);
 }
 
-/*评论区图片链接点击处理*/
+/* 评论区图片链接点击处理 */
 !function(){
 	let invid = 0;
 	let activeImg = null;
@@ -1057,7 +1057,7 @@ if (localStorage["argon_custom_theme_color"] != undefined){
 	});
 }();
 
-/*打字效果*/
+/* 打字效果 */
 function typeEffect(element, text, now, interval){
 	element.classList.add('typing-effect');
 	if (now > text.length){
@@ -1076,7 +1076,7 @@ function typeEffect(element, text, now, interval){
 	}
 }();
 
-/*一言*/
+/* 一言 */
 if ($(".hitokoto").length > 0){
 	$.ajax({
 		type: 'GET',
@@ -1090,7 +1090,7 @@ if ($(".hitokoto").length > 0){
 	});
 }
 
-/*Highlight.js*/
+/* Highlight.js */
 function randomString(len) {
 	len = len || 32;
 	let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -1213,7 +1213,7 @@ $(document).on("click" , ".hljs-control-toggle-linenumber" , function(){
 	block.toggleClass("hljs-hide-linenumber");
 });
 
-/*时间差计算*/
+/* 时间差计算 */
 function addPreZero(num, n) {
 	var len = num.toString().length;
 	while(len < n) {
@@ -1289,7 +1289,7 @@ setInterval(function(){
 	calcHumanTimesOnPage()
 }, 15000);
 
-/*搜索*/
+/* 搜索 */
 // https://github.com/PaicHyperionDev/hexo-generator-search
 var searchFunc = function(path, search_id, content_id) {
 	'use strict';
@@ -1389,7 +1389,7 @@ $(document).on("click" , ".search-result-title" , function(){
 });
 
 
-/*Console*/
+/* Console */
 !function(){
 	console.log('%cTheme: %cArgon%c-Hexo%c By solstice23', 'color: rgba(255,255,255,.6); background: #5e72e4; font-size: 15px;border-radius:5px 0 0 5px;padding:10px 0 10px 20px;','color: rgba(255,255,255,1); background: #5e72e4; font-size: 15px;border-radius:0;padding:10px 0 10px 0px;', 'color: rgba(255,255,255,.6); background: #5e72e4; font-size: 15px;padding:10px 15px 10px 0px;','color: #fff; background: #92A1F4; font-size: 15px;border-radius:0 5px 5px 0;padding:10px 20px 10px 15px;');
 	console.log('%cVersion%c' + $("meta[name='theme-version']").attr("content"), 'color:#fff; background: #5e72e4;font-size: 12px;border-radius:5px 0 0 5px;padding:3px 10px 3px 10px;','color:#fff; background: #92a1f4;font-size: 12px;border-radius:0 5px 5px 0;padding:3px 10px 3px 10px;');
