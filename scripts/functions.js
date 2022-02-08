@@ -1,4 +1,4 @@
-//读配置文件
+// 读配置文件
 hexo.on('generateBefore', function () {
 	var rootConfig = hexo.config;
 	if (hexo.locals.get) {
@@ -18,7 +18,7 @@ hexo.extend.helper.register('get_option', function(value, defaultValue){
 	return value;
 });
 
-//文章头图
+// 文章头图
 hexo.extend.helper.register('get_first_image_of_article', function(post){
 	let match = post.content.match(/<img(.*?)src="((http:|https:)?\/\/(.*?))"(.*?)\/.>/i);
 	if (match != null){
@@ -51,7 +51,7 @@ hexo.extend.helper.register('get_thumbnail', function(post, theme){
 	return this.get_first_image_of_article(post);
 });
 
-//颜色计算
+// 颜色计算
 hexo.extend.helper.register('rgb2hsl', function(R,G,B){
 	let r = R / 255;
 	let g = G / 255;
@@ -90,7 +90,7 @@ hexo.extend.helper.register('rgb2hsl', function(R,G,B){
 		if (H > 1) H -= 1;
 	}
 	return {
-		'h': H,//0~1
+		'h': H, // 0~1
 		's': S,
 		'l': L
 	};
@@ -123,10 +123,10 @@ hexo.extend.helper.register('hsl2rgb', function(h,s,l){
 		b = this.Hue_2_RGB(var_1, var_2, h - (1 / 3));
 	}
 	return {
-		'R': Math.round(r * 255),//0~255
+		'R': Math.round(r * 255), // 0~255
 		'G': Math.round(g * 255),
 		'B': Math.round(b * 255),
-		'r': r,//0~1
+		'r': r, // 0~1
 		'g': g,
 		'b': b
 	};
@@ -150,16 +150,16 @@ hexo.extend.helper.register('rgb2hex', function(r,g,b){
 	return "#" + rh + gh + bh;
 });
 hexo.extend.helper.register('hex2rgb', function(hex){
-	//hex: #XXXXXX
+	// hex: #XXXXXX
 	hex = hex.toUpperCase();
 	let dec = {
 		'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, 'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15
 	};
 	return {
-		'R': (dec[hex.substr(1,1)] * 16 + dec[hex.substr(2,1)]),//0~255
+		'R': (dec[hex.substr(1,1)] * 16 + dec[hex.substr(2,1)]), // 0~255
 		'G': (dec[hex.substr(3,1)] * 16 + dec[hex.substr(4,1)]),
 		'B': (dec[hex.substr(5,1)] * 16 + dec[hex.substr(6,1)]),
-		'r': (dec[hex.substr(1,1)] * 16 + dec[hex.substr(2,1)]) / 255,//0~1
+		'r': (dec[hex.substr(1,1)] * 16 + dec[hex.substr(2,1)]) / 255, // 0~1
 		'g': (dec[hex.substr(3,1)] * 16 + dec[hex.substr(4,1)]) / 255,
 		'b': (dec[hex.substr(5,1)] * 16 + dec[hex.substr(6,1)]) / 255
 	};
@@ -217,7 +217,7 @@ hexo.extend.helper.register('totalcount', function (site) {
 	return Math.round(count / 100) / 10 + 'k';
 });
 
-//excerpt
+// excerpt
 hexo.extend.helper.register('getexcerpt', function (content, len, moretag) {
 	content = stripHTML(content);
 	if (moretag){
@@ -231,9 +231,9 @@ hexo.extend.helper.register('getexcerpt', function (content, len, moretag) {
 	return content.substr(0,len) + "...";
 });
 
-//预处理文章
+// 预处理文章
 hexo.extend.helper.register('argon_preprocess_article', function (content, theme, moretag) {
-	//Lazyload
+	// Lazyload
 	if (theme.enable_lazyload){
 		let lazyload_loading_style = theme.lazyload_loading_style;
 		if (lazyload_loading_style == undefined || lazyload_loading_style == ''){
@@ -245,7 +245,7 @@ hexo.extend.helper.register('argon_preprocess_article', function (content, theme
 		content = content.replace(/<img(.*?)data-full-url=[\'"]([^\'"]+)[\'"](.*)>/ig,"<img$1data-full-url=\"$2\" data-original=\"$2\"$3>");
 		content = content.replace(/<img(.*?)srcset=[\'"](.*?)[\'"](.*)>/ig,"<img$1$3>");
 	}
-	//More Tag
+	// More Tag
 	if (moretag){
 		if (content.search(/<!--more(.*?)-->/i) !== -1){
 			content = content.substr(0, content.search(/<!--more(.*?)-->/i)) + "...";
@@ -254,7 +254,7 @@ hexo.extend.helper.register('argon_preprocess_article', function (content, theme
 	return content;
 });
 
-//文末信息
+// 文末信息
 hexo.extend.helper.register('get_additional_content_after_post', function (post, theme) {
 	if (post.after_post != undefined){
 		return post.after_post;
