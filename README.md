@@ -6,7 +6,7 @@
 
 # 关于
 
-Hexo-Theme-Argon 移植自 Wordpress 版 Argon 主题，维护速度相比 Wordpress 版会慢很多，不会总是随 Wordpress 版本更新。
+Hexo-Theme-Argon 移植自 WordPress 版 Argon 主题，维护速度相比 WordPress 版会慢很多，不会总是随 WordPress 版本更新。
 
 Hexo 版本目前属于移植早期，有可能出现各种 BUG，**欢迎 PR**。
 
@@ -71,7 +71,7 @@ Argon 支持给文章设定一些单独的参数，例如文章头图
 + 保留了 Wordpress 版的大部分特性
 + 相同的界面
 + 暂时不支持多语言（欢迎 PR）
-+ 目前仅支持 Gitalk 评论系统（欢迎 PR）
++ 目前仅支持 Gitalk、giscus 评论系统（欢迎 PR）
 
 # Telegram 频道
 [t.me/argontheme](https://t.me/argontheme)
