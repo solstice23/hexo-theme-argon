@@ -128,3 +128,6 @@ giscus: # https://giscus.app/zh-CN
   input_position: 'top'
   theme: 'light'
   lang: 'zh-CN'
+waline: # https://waline.js.org/guide/get-started.html
+  enable: true
+  server_url: 'https://waline.parksi.top'

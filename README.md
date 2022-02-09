@@ -71,7 +71,7 @@ Argon 支持给文章设定一些单独的参数，例如文章头图
 + 保留了 Wordpress 版的大部分特性
 + 相同的界面
 + 暂时不支持多语言（欢迎 PR）
-+ 目前仅支持 Gitalk、giscus 评论系统（欢迎 PR）
++ 目前仅支持 Gitalk、giscus、waline 评论系统（欢迎 PR）
 
 # Telegram 频道
 [t.me/argontheme](https://t.me/argontheme)
