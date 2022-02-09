@@ -51,11 +51,14 @@
 	<%- css('/assets/argon_css_merged.css') %>
 	<%- css('/style.css') %>
 	<%- css('//fonts.loli.net/css?family=Open+Sans:300,400,600,700|Noto+Serif+SC:300,600&display=swap') %>
-	<%- css('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css') %>
 	<%- js('/assets/argon_js_merged.js') %>
 	<%- js('/assets/js/argon.min.js') %>
 	<%- js('//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js') %>
-	<%- js('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js') %>
+
+	<% if (theme.gitalk.enable) { %>
+		<%- css('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css') %>
+		<%- js('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js') %>
+	<% } %>
 
 	<script>
 		var argonConfig = {
