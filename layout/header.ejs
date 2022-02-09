@@ -51,11 +51,14 @@
 	<%- css('/assets/argon_css_merged.css') %>
 	<%- css('/style.css') %>
 	<%- css('//fonts.loli.net/css?family=Open+Sans:300,400,600,700|Noto+Serif+SC:300,600&display=swap') %>
-	<%- css('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css') %>
 	<%- js('/assets/argon_js_merged.js') %>
 	<%- js('/assets/js/argon.min.js') %>
 	<%- js('//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js') %>
-	<%- js('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js') %>
+
+	<% if (theme.gitalk.enable) { %>
+		<%- css('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css') %>
+		<%- js('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js') %>
+	<% } %>
 
 	<script>
 		var argonConfig = {
@@ -483,3 +486,28 @@
 <% if (theme.waline.enable) { %>
 	<script src="https://cdn.jsdelivr.net/npm/@waline/client"></script>
 <% } %>
+
+<% if (theme.baidu_analytics.enable) { %>
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "https://hm.baidu.com/hm.js?<%= theme.baidu_analytics.id %>" ;
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+		</script>
+		
+<% } %>
+
+<% if (theme.gtag.enable) { %>
+<script async src="<%= 'https://www.googletagmanager.com/gtag/js?id=' + theme.gtag.id %>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '<%= theme.gtag.id %>');
+</script>
+<% } %>
+

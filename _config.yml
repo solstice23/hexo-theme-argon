@@ -131,3 +131,15 @@ giscus: # https://giscus.app/zh-CN
 waline: # https://waline.js.org/guide/get-started.html
   enable: false # 是否启用 Waline 评论系统
   server_url: '' 
+
+# 分析
+# 百度统计
+baidu_analytics:
+  enable: false # 是否启用 百度统计
+  id: '' # hm.js? 后的一串字符
+
+# gtag 谷歌全局网络代码
+# Google Analytics  Universal Analytics(old) 与 Google Analytics（分析）4 均使用 gtag
+gtag:
+  enable: false # 是否启用 gtag
+  id: '' # 请包含 G- 或 UA-
