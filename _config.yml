@@ -112,14 +112,14 @@ custom_html_foot: '' # 页尾脚本，HTML
 
 # 评论
 gitalk:
-  enable: true # 是否启用 Gitalk 评论系统
+  enable: false # 是否启用 Gitalk 评论系统
   owner: ''
   repo: ''
   admin: ''
   clientID: ''
   clientSecret: ''
 giscus: # https://giscus.app/zh-CN
-  enable: 
+  enable: false # 是否启用 Giscus 评论系统
   repo: ''
   repo_id: ''
   category: ''
@@ -129,5 +129,5 @@ giscus: # https://giscus.app/zh-CN
   theme: 'light'
   lang: 'zh-CN'
 waline: # https://waline.js.org/guide/get-started.html
-  enable: true
+  enable: false # 是否启用 Waline 评论系统
   server_url: 'https://waline.parksi.top'
