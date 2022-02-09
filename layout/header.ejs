@@ -483,3 +483,28 @@
 <% if (theme.waline.enable) { %>
 	<script src="https://cdn.jsdelivr.net/npm/@waline/client"></script>
 <% } %>
+
+<% if (theme.baidu_analytics.enable) { %>
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "https://hm.baidu.com/hm.js?<%= theme.baidu_analytics.id %>" ;
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+		</script>
+		
+<% } %>
+
+<% if (theme.gtag.enable) { %>
+<script async src="<%= 'https://www.googletagmanager.com/gtag/js?id=' + theme.gtag.id %>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '<%= theme.gtag.id %>');
+</script>
+<% } %>
+
