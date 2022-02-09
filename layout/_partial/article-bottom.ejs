@@ -111,6 +111,11 @@
 		<%- partial('_comment/giscus') %>
 	</div>
 <% } %>
+<% if (theme.waline.enable) { %>
+	<div id="post_comment" class="card shadow-sm">
+		<%- partial('_comment/waline') %>
+	</div>
+<% } %>
 <%
 	function get_prev_next_post_card(){
 		let res = "";
