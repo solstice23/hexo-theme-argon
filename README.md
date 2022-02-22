@@ -18,10 +18,15 @@ Hexo-Theme-Argon 移植自 WordPress 版 Argon 主题。
 
 ## 1. 安装并启用主题
 
-1.在 `Hexo 根目录/themes` 目录下 Clone 本 Repo
+1.在 `Hexo 根目录/themes` 目录下 Clone 本 Repo。
 
 ```
 git clone https://github.com/solstice23/hexo-theme-argon.git
+```
+安装 ejs 渲染器。
+
+```
+npm install hexo-renderer-ejs
 ```
 
 2. 重命名 Clone 后的文件夹为 `argon`
