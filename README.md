@@ -6,9 +6,13 @@
 
 # 关于
 
-Hexo-Theme-Argon 移植自 WordPress 版 Argon 主题，维护速度相比 WordPress 版会慢很多，不会总是随 WordPress 版本更新。
+Hexo-Theme-Argon 移植自 WordPress 版 Argon 主题。
 
-Hexo 版本目前属于移植早期，有可能出现各种 BUG，**欢迎 PR**。
+## 项目状态
+
+目前没有精力维护移植版，只维护 Wordpress 版本。Wordpress 的新功能将不会来到 Hexo 版本，只进行必要的 BUG 修复。~~（很久没有使用 Hexo）~~
+
+欢迎提交 Pull Request 贡献/移植新功能/修复 BUG。
 
 # 使用
 
