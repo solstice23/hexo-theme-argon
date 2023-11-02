@@ -420,13 +420,13 @@
 	<button id="fabtn_back_to_top" class="btn btn-icon btn-neutral fabtn shadow-sm" type="button" aria-label="Back To Top" tooltip="回到顶部">
 		<span class="btn-inner--icon"><i class="fa fa-angle-up"></i></span>
 	</button>
-	<button id="fabtn_go_to_comment" class="btn btn-icon btn-neutral fabtn shadow-sm d-none" type="button" <-% theme.fab_show_gotocomment_button ? "" : "style='display: none;'" %> aria-label="Comment" tooltip="评论">
+	<button id="fabtn_go_to_comment" class="btn btn-icon btn-neutral fabtn shadow-sm d-none" type="button" <% if (!theme.fab_show_gotocomment_button) { %>style='display: none;' <% } %> aria-label="Comment" tooltip="评论">
 		<span class="btn-inner--icon"><i class="fa fa-comment-o"></i></span>
 	</button>
-	<button id="fabtn_toggle_darkmode" class="btn btn-icon btn-neutral fabtn shadow-sm" type="button" <-% theme.fab_show_darkmode_button ? "" : "style='display: none;'" %> aria-label="Toggle Darkmode" tooltip-darkmode="夜间模式" tooltip-blackmode="暗黑模式" tooltip-lightmode="日间模式">
+	<button id="fabtn_toggle_darkmode" class="btn btn-icon btn-neutral fabtn shadow-sm" type="button" <% if (!theme.fab_show_darkmode_button) { %>style='display: none;' <% } %> aria-label="Toggle Darkmode" tooltip-darkmode="夜间模式" tooltip-blackmode="暗黑模式" tooltip-lightmode="日间模式">
 		<span class="btn-inner--icon"><i class="fa fa-moon-o"></i><i class='fa fa-lightbulb-o'></i></span>
 	</button>
-	<button id="fabtn_toggle_blog_settings_popup" class="btn btn-icon btn-neutral fabtn shadow-sm" type="button" <-% theme.fab_show_settings_button ? "" : "style='display: none;'" %> aria-label="Open Blog Settings Menu" tooltip="设置">
+	<button id="fabtn_toggle_blog_settings_popup" class="btn btn-icon btn-neutral fabtn shadow-sm" type="button" <% if (!theme.fab_show_settings_button) { %>style='display: none;' <% } %> aria-label="Open Blog Settings Menu" tooltip="设置">
 		<span class="btn-inner--icon"><i class="fa fa-cog"></i></span>
 	</button>
 	<div id="fabtn_blog_settings_popup" class="card shadow-sm" style="opacity: 0;" aria-hidden="true">
