@@ -6,7 +6,7 @@
 		repo: '<%= theme.gitalk.repo %>',
 		owner: '<%= theme.gitalk.owner %>',
 		admin: ['<%= theme.gitalk.admin %>'],
-		id: location.pathname,
+		id: '<%= post.title %>',
 		distractionFreeMode: false
 	})
 	gitalk.render('gitalk-container');
