@@ -131,6 +131,10 @@ giscus: # https://giscus.app/zh-CN
 waline: # https://waline.js.org/guide/get-started.html
   enable: false # 是否启用 Waline 评论系统
   server_url: '' 
+twikoo: # https://twikoo.js.org
+  enable: false # 是否启用 Twikoo 评论系统
+  envID: ' '
+  lang: 'zh-CN'
 
 # 分析
 # 百度统计
